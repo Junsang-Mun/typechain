@@ -11,6 +11,7 @@
   "author": "",
   "license": "",
   "dependencies": {
+    "crypto-js": "^4.1.1",
     "tsc-watch": "^5.0.3"
   }
 }

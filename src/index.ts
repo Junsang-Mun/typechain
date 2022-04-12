@@ -1,26 +1,49 @@
-class Human {
-  public name: string;
-  public age: number;
-  public gender: string;
-  constructor(name: string, age: number, gender: string) {
-    this.name = name;
-    this.age = age;
-    this.gender = gender;
+import * as CryptoJS from "crypto-js";
+class Block {
+  public index: number;
+  public hash: string;
+  public prevHash: string;
+  public data: string;
+  public timestamp: number;
+
+  static calculateBlockHash = (
+    index: number,
+    prevHash: string,
+    timestamp: number,
+    data: string
+  ): string => CryptoJS.SHA256(index + prevHash + timestamp + data).toString();
+
+  constructor(
+    index: number,
+    hash: string,
+    prevHash: string,
+    data: string,
+    timestamp: number
+  ) {
+    this.index = index;
+    this.hash = hash;
+    this.prevHash = prevHash;
+    this.data = data;
+    this.timestamp = timestamp;
   }
 }
 
-const lynn = new Human("Lynn", 1, "eagle");
+Block.calculateBlockHash;
 
-const person = {
-  name: "Lee Sang Hae Ssi",
-  gender: "Pokémon",
-  age: 1,
-};
+const genesisBlock: Block = new Block(
+  0,
+  "237945872943857",
+  "",
+  "Hello",
+  123456
+);
 
-const sayHi = (person: Human): string => {
-  return `Hi, you are ${person.name} and you are ${person.age} years old. And you are a ${person.gender}!`;
-};
+let blockChain: Block[] = [genesisBlock];
 
-console.log(sayHi(lynn));
+const getBlockChain = (): Block[] => blockChain;
+
+const getLatestBlock = (): Block => blockChain[blockChain.length - 1];
+
+const getNewTimeStamp = (): number => Math.round(new Date().getTime() / 1000);
 
 export {};
