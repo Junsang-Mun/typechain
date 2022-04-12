@@ -9,5 +9,8 @@
     "prestart": "tsc"
   },
   "author": "",
-  "license": ""
+  "license": "",
+  "dependencies": {
+    "tsc-watch": "^5.0.3"
+  }
 }
